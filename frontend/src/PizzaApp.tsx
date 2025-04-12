@@ -1,9 +1,12 @@
 import { PizzaItem } from "./components/PizzaItem";
+import { CartOrderItem } from "./components/CartOrderItem";
 import { usePizzas } from "./hooks/usePizzas";
+import { orderStore } from "./store/orderStore";
 
 
 const PizzaApp = () => {
-  const { pizzas } = usePizzas();
+  const { pizzas, getPizzaById } = usePizzas();
+  const { orders, removeFromOrder, updateQuantity } = orderStore();
 
   return (
     <div className="min-h-screen bg-gray-500 py-6">
@@ -19,8 +22,42 @@ const PizzaApp = () => {
               ))}
             </div>
           </section>
-
-
+          <div className="lg:w-1/2 space-y-6">
+            <div className="bg-white rounded-lg shadow-sm p-5">
+              <h2 className="text-xl font-bold mb-4 text-gray-700">Order</h2>
+              <div className="space-y-3">
+                {orders.length === 0 ? (
+                  <p className="text-gray-400 text-center py-4">Add pizzas </p>
+                ) : (
+                  <>
+                    {orders.map((order) => {
+                      const pizza = getPizzaById(order.pizzaId);
+                      if (!pizza) return null;
+                      return (
+                        <CartOrderItem
+                          key={order.pizzaId}
+                          order={order}
+                          pizza={pizza}
+                          onRemove={() => removeFromOrder(order.pizzaId)}
+                          onQuantityChange={(newQuantity: number) => updateQuantity(order.pizzaId, newQuantity)}
+                        />
+                      );
+                    })}
+                    <button
+                      onClick={() => console.log("order")}
+                      className={`w-full mt-4 py-2.5 rounded-md font-medium ${orders.length === 0
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-blue-600 hover:bg-blue-700 text-white'
+                        }`}
+                      disabled={orders.length === 0}
+                    >
+                      Order pizzas
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

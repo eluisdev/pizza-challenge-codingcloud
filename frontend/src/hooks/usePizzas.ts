@@ -18,5 +18,7 @@ export const usePizzas = () => {
     fetchPizzas();
   }, []);
 
-  return { pizzas };
+  const getPizzaById = (id: number) => pizzas.find((pizza) => pizza.id === id);
+
+  return { pizzas, getPizzaById };
 };
