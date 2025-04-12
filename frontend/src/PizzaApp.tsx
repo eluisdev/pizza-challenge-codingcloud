@@ -2,10 +2,13 @@ import { PizzaItem } from "./components/PizzaItem";
 import { CartOrderItem } from "./components/CartOrderItem";
 import { usePizzas } from "./hooks/usePizzas";
 import { orderStore } from "./store/orderStore";
+import { useOrders } from "./hooks/useOrders";
+import { OrderItem } from "./components/OrderItem";
 
 
 const PizzaApp = () => {
   const { pizzas, getPizzaById } = usePizzas();
+  const { orders: ordersResponse, handleCreateOrder } = useOrders();
   const { orders, removeFromOrder, updateQuantity } = orderStore();
 
   return (
@@ -44,7 +47,7 @@ const PizzaApp = () => {
                       );
                     })}
                     <button
-                      onClick={() => console.log("order")}
+                      onClick={() => handleCreateOrder(orders)}
                       className={`w-full mt-4 py-2.5 rounded-md font-medium ${orders.length === 0
                         ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                         : 'bg-blue-600 hover:bg-blue-700 text-white'
@@ -57,6 +60,16 @@ const PizzaApp = () => {
                 )}
               </div>
             </div>
+            {ordersResponse.length > 0 && (
+              <div className="bg-white rounded-lg shadow-sm p-5">
+                <h2 className="text-xl font-bold mb-4 text-gray-700">Orders</h2>
+                <div className="">
+                  {ordersResponse.map((order, index) => (
+                    <OrderItem key={index} order={order} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
