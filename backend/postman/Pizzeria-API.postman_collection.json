@@ -1,0 +1,212 @@
+{
+  "info": {
+    "_postman_id": "pizza-orders-api",
+    "name": "Pizza Delivery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection for testing the Pizza and Orders API"
+  },
+  "item": [
+    {
+      "name": "Pizzas",
+      "item": [
+        {
+          "name": "Get all pizzas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:4000/api/pizzas",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["api", "pizzas"]
+            },
+            "response": [
+              {
+                "name": "Successful response",
+                "originalRequest": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "http://localhost:4000/api/pizzas",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "4000",
+                    "path": ["api", "pizzas"]
+                  }
+                },
+                "status": "OK",
+                "code": 200,
+                "_postman_previewlanguage": "json",
+                "body": "[{\"id\":1,\"name\":\"Margherita\",\"price\":5,\"ingredients\":[\"tomato\",\"mozzarella\"]},{\"id\":2,\"name\":\"Bufala\",\"price\":6,\"ingredients\":[\"tomato\",\"mozarella di bufala\"]}]"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Get all orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:4000/api/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["api", "orders"]
+            },
+            "response": [
+              {
+                "name": "Successful response",
+                "originalRequest": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "http://localhost:4000/api/orders",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "4000",
+                    "path": ["api", "orders"]
+                  }
+                },
+                "status": "OK",
+                "code": 200,
+                "_postman_previewlanguage": "json",
+                "body": "[]"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Create new order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"pizzaId\": 1,\n      \"quantity\": 2\n    },\n    {\n      \"pizzaId\": 3,\n      \"quantity\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["api", "orders"]
+            },
+            "response": [
+              {
+                "name": "Successful response",
+                "originalRequest": {
+                  "method": "POST",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"items\": [\n    {\n      \"pizzaId\": 1,\n      \"quantity\": 2\n    },\n    {\n      \"pizzaId\": 3,\n      \"quantity\": 1\n    }\n  ]\n}"
+                  },
+                  "url": {
+                    "raw": "http://localhost:4000/api/orders",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "4000",
+                    "path": ["api", "orders"]
+                  }
+                },
+                "status": "Created",
+                "code": 201,
+                "_postman_previewlanguage": "json",
+                "body": "{\n  \"message\": \"Order 1 created with: 2x Margherita, 1x Napolitana\"\n}"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Get order by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:4000/api/orders/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "4000",
+              "path": ["api", "orders", "1"]
+            },
+            "response": [
+              {
+                "name": "Successful response",
+                "originalRequest": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "http://localhost:4000/api/orders/1",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "4000",
+                    "path": ["api", "orders", "1"]
+                  }
+                },
+                "status": "OK",
+                "code": 200,
+                "_postman_previewlanguage": "json",
+                "body": "{\n  \"id\": 1,\n  \"items\": [\n    {\n      \"pizzaId\": 1,\n      \"quantity\": 2\n    },\n    {\n      \"pizzaId\": 3,\n      \"quantity\": 1\n    }\n  ]\n}"
+              },
+              {
+                "name": "Order not found",
+                "originalRequest": {
+                  "method": "GET",
+                  "header": [],
+                  "url": {
+                    "raw": "http://localhost:4000/api/orders/999",
+                    "protocol": "http",
+                    "host": ["localhost"],
+                    "port": "4000",
+                    "path": ["api", "orders", "999"]
+                  }
+                },
+                "status": "Not Found",
+                "code": 404,
+                "_postman_previewlanguage": "json",
+                "body": "{\n  \"message\": \"Order not found\"\n}"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
