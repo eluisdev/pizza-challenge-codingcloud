@@ -1,0 +1,29 @@
+{
+  "name": "pizza-challenge-codingcloud",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "front-dev": "npm --workspace=frontend run dev",
+    "front-start": "npm --workspace=frontend run dev",
+    "front-build": "npm --workspace=frontend run build",
+    "front-test": "npm --workspace=frontend run test",
+    "back-dev": "npm --workspace=backend run dev",
+    "back-start": "npm --workspace=backend run dev",
+    "back-build": "npm --workspace=backend run build",
+    "back-test": "npm --workspace=backend run test",
+    "dev": "concurrently \"npm run back-dev\" \"npm run front-dev\"",
+    "start": "concurrently \"npm run back-start\" \"npm run front-start\"",
+    "build": "concurrently \"npm run back-build\" \"npm run front-build\"",
+    "test": "concurrently \"npm run back-test\" \"npm run front-test\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
