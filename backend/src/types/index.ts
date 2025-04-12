@@ -4,3 +4,13 @@ export interface Pizza {
   price: number;
   ingredients: string[];
 }
+
+export interface OrderItem {
+  pizzaId: number;
+  quantity: number;
+}
+
+export interface Order {
+  id: number;
+  items: OrderItem[];
+}
