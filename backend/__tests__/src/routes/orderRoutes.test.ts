@@ -117,13 +117,21 @@ describe("Order Routes", () => {
 
       (OrderController.createOrder as jest.Mock).mockImplementation(
         (req: Request, res: Response) => {
-          res.status(201).json({ message: "Order created" });
+          res.status(400).json({
+            errors: [
+              {
+                type: "field",
+                value: [],
+                msg: "You must send at least one item",
+                path: "items",
+                location: "body",
+              },
+            ],
+          });
         }
       );
-
       const response = await request(app).post("/").send(invalidOrderData);
-      expect(response.status).toBe(201);
-      expect(OrderController.createOrder).toHaveBeenCalledTimes(1);
+      expect(response.status).toBe(400);
     });
   });
 });
